@@ -4,7 +4,6 @@ import conexao.Conexao;
 import java.sql.Connection;
 
 public class ProdutoDAO {
-    
     private Connection conn;
     private Conexao conexao;
     
