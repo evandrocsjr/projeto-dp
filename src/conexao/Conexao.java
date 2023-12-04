@@ -7,8 +7,8 @@ public class Conexao {
       public Connection getConexao(){
         try{
             Connection conn = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/bd_dp?useTimezone=true&serverTimezone=UTC",
-                    "root", "root"
+                "jdbc:mysql://localhost:3306/projetoasmar?useTimezone=true&serverTimezone=UTC",
+                    "root", "0011"
             );
             return conn;
         }
