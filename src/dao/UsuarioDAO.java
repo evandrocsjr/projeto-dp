@@ -128,4 +128,29 @@ public class UsuarioDAO {
             return null;
         }
     }
+    
+    public Usuario getUsuarioByIdOrNome(long id, String nome) {
+        String sql = "SELECT * FROM usuario WHERE (id = ? OR ? = 0) AND nome LIKE ?";
+        try {
+            PreparedStatement stmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+
+            stmt.setLong(1, id);
+            stmt.setLong(2, id);  
+            stmt.setString(3, "%" + nome + "%");
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs.first()) {
+                Usuario usuario = new Usuario();
+                usuario.setId(rs.getLong("id"));
+                usuario.setNome(rs.getString("nome"));
+                usuario.setEmail(rs.getString("email"));
+                usuario.setCargo(rs.getString("cargo"));
+
+                return usuario;
+            }
+        } catch (SQLException ex) {
+            System.out.println("Erro ao consultar usuário por ID ou Nome: " + ex.getMessage());
+        }
+        return null;
+    }
 }
