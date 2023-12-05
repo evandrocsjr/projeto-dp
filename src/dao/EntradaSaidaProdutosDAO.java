@@ -55,7 +55,7 @@ public class EntradaSaidaProdutosDAO {
             movimentacao.setIdUsuario(new UsuarioDAO().getUsuario(rs.getLong("id_usuario")));
             movimentacao.setMotivo(rs.getString("motivo"));
             movimentacao.setQuantidade(rs.getInt("quantidade"));
-            movimentacao.setDataModificacao(rs.getDate("data_modificacao"));
+            movimentacao.setDataModificacao(rs.getDate("data_hora"));
 
             return movimentacao;
         } catch (SQLException ex) {
@@ -108,7 +108,7 @@ public class EntradaSaidaProdutosDAO {
                 movimentacao.setIdUsuario(new UsuarioDAO().getUsuario(rs.getLong("id_usuario")));
                 movimentacao.setMotivo(rs.getString("motivo"));
                 movimentacao.setQuantidade(rs.getInt("quantidade"));
-                movimentacao.setDataModificacao(rs.getDate("data_modificacao"));
+                movimentacao.setDataModificacao(rs.getDate("data_hora"));
 
                 listaMovimentacoes.add(movimentacao);
             }
@@ -134,7 +134,7 @@ public class EntradaSaidaProdutosDAO {
                 movimentacao.setIdUsuario(new UsuarioDAO().getUsuario(rs.getLong("id_usuario")));
                 movimentacao.setMotivo(rs.getString("motivo"));
                 movimentacao.setQuantidade(rs.getInt("quantidade"));
-                movimentacao.setDataModificacao(rs.getDate("data_modificacao"));
+                movimentacao.setDataModificacao(rs.getDate("data_hora"));
 
                 listaMovimentacoes.add(movimentacao);
             }

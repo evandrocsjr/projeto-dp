@@ -45,7 +45,7 @@ public class ProdutoDAO {
             rs.first();
             produto.setId(id);
             produto.setDescricao(rs.getString("descricao"));
-            produto.setPrecoCusto(rs.getDouble("precoCusto"));
+            produto.setPrecoCusto(rs.getDouble("preco_de_custo"));
             produto.setEstoque(rs.getInt("estoque"));
             produto.setValidade(rs.getDate("validade"));
 
@@ -96,7 +96,7 @@ public class ProdutoDAO {
                 Produto produto = new Produto();
                 produto.setId(rs.getLong("id"));
                 produto.setDescricao(rs.getString("descricao"));
-                produto.setPrecoCusto(rs.getDouble("precoCusto"));
+                produto.setPrecoCusto(rs.getDouble("preco_de_custo"));
                 produto.setEstoque(rs.getInt("estoque"));
                 produto.setValidade(rs.getDate("validade"));
 
@@ -121,7 +121,7 @@ public class ProdutoDAO {
                 Produto produto = new Produto();
                 produto.setId(rs.getLong("id"));
                 produto.setDescricao(rs.getString("descricao"));
-                produto.setPrecoCusto(rs.getDouble("precoCusto"));
+                produto.setPrecoCusto(rs.getDouble("preco_de_custo"));
                 produto.setEstoque(rs.getInt("estoque"));
                 produto.setValidade(rs.getDate("validade"));
 
