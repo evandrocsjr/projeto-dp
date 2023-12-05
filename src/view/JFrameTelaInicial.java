@@ -77,6 +77,11 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
 
         menu_EditarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icons8-editar-usuário-masculino-18.png"))); // NOI18N
         menu_EditarUsuario.setText("EDITAR/EXCLUIR");
+        menu_EditarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_EditarUsuarioActionPerformed(evt);
+            }
+        });
         jMenu2.add(menu_EditarUsuario);
 
         jMenuBar1.add(jMenu2);
@@ -95,6 +100,11 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
 
         menu_EditarProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icons8-esvaziar-o-carrinho-de-compras-18.png"))); // NOI18N
         menu_EditarProduto.setText("EDITAR/EXCLUIR");
+        menu_EditarProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_EditarProdutoActionPerformed(evt);
+            }
+        });
         jMenu3.add(menu_EditarProduto);
 
         jMenuBar1.add(jMenu3);
@@ -118,10 +128,20 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
 
         menu_ConsultaUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icons8-usuário-18.png"))); // NOI18N
         menu_ConsultaUsuarios.setText("USUÁRIOS");
+        menu_ConsultaUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_ConsultaUsuariosActionPerformed(evt);
+            }
+        });
         jMenu6.add(menu_ConsultaUsuarios);
 
         menu_ConsultasProdutos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icons8-carrinho-18.png"))); // NOI18N
         menu_ConsultasProdutos.setText("PRODUTOS");
+        menu_ConsultasProdutos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_ConsultasProdutosActionPerformed(evt);
+            }
+        });
         jMenu6.add(menu_ConsultasProdutos);
 
         menu_ConsultasEstoque.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icons8-produto-18.png"))); // NOI18N
@@ -183,6 +203,26 @@ public class JFrameTelaInicial extends javax.swing.JFrame {
     private void menu_SairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_SairActionPerformed
         System.exit(0);
     }//GEN-LAST:event_menu_SairActionPerformed
+
+    private void menu_ConsultaUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_ConsultaUsuariosActionPerformed
+        JFrameConsultaUsuario jFrameConsultaUsuario = new JFrameConsultaUsuario();
+        jFrameConsultaUsuario.setVisible(true);
+    }//GEN-LAST:event_menu_ConsultaUsuariosActionPerformed
+
+    private void menu_ConsultasProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_ConsultasProdutosActionPerformed
+        JFrameConsultaProduto jFrameConsultaProduto = new JFrameConsultaProduto();
+        jFrameConsultaProduto.setVisible(true);
+    }//GEN-LAST:event_menu_ConsultasProdutosActionPerformed
+
+    private void menu_EditarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_EditarUsuarioActionPerformed
+        JFrameAtualizaUsuario jFrameAtualizaUsuario = new JFrameAtualizaUsuario();
+        jFrameAtualizaUsuario.setVisible(true);
+    }//GEN-LAST:event_menu_EditarUsuarioActionPerformed
+
+    private void menu_EditarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_EditarProdutoActionPerformed
+        JFrameAtualizaProduto jFrameAtualizaProduto = new JFrameAtualizaProduto();
+        jFrameAtualizaProduto.setVisible(true);
+    }//GEN-LAST:event_menu_EditarProdutoActionPerformed
 
     /**
      * @param args the command line arguments

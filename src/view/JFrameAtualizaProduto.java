@@ -21,6 +21,7 @@ public class JFrameAtualizaProduto extends javax.swing.JFrame {
      */
     public JFrameAtualizaProduto() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
