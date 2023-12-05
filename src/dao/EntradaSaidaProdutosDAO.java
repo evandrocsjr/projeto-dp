@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import model.Produto;
 
 public class EntradaSaidaProdutosDAO {
     private Conexao conexao;
@@ -22,7 +23,7 @@ public class EntradaSaidaProdutosDAO {
     }
 
     public void inserir(EntradaSaidaProdutos movimentacao) {
-        String sql = "INSERT INTO EntradaSaidaProdutos (id_produto, id_usuario, motivo, quantidade, data_modificacao) VALUES (?, ?, ?, ?, ?);";
+        String sql = "INSERT INTO Entrada_saida_produtos (id_produto, id_usuario, motivo, quantidade, data_hora) VALUES (?, ?, ?, ?, ?);";
 
         try {
             PreparedStatement stmt = this.conn.prepareStatement(sql);
@@ -39,13 +40,14 @@ public class EntradaSaidaProdutosDAO {
     }
 
     public EntradaSaidaProdutos getMovimentacao(long id) {
-        String sql = "SELECT * FROM EntradaSaidaProdutos WHERE id = ?";
+        String sql = "SELECT * FROM Entrada_saida_produtos WHERE id = ?";
         try {
             PreparedStatement stmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
             stmt.setLong(1, id);
             ResultSet rs = stmt.executeQuery();
             EntradaSaidaProdutos movimentacao = new EntradaSaidaProdutos();
+            Produto produto = new Produto();
 
             rs.first();
             movimentacao.setId(id);
@@ -64,7 +66,7 @@ public class EntradaSaidaProdutosDAO {
 
     public void editar(EntradaSaidaProdutos movimentacao) {
         try {
-            String sql = "UPDATE EntradaSaidaProdutos SET id_produto=?, id_usuario=?, motivo=?, quantidade=?, data_modificacao=? WHERE id=?";
+            String sql = "UPDATE Entrada_saida_produtos SET id_produto=?, id_usuario=?, motivo=?, quantidade=?, data_hora=? WHERE id=?";
 
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setLong(1, movimentacao.getIdProduto().getId());
@@ -82,7 +84,7 @@ public class EntradaSaidaProdutosDAO {
 
     public void excluir(long id) {
         try {
-            String sql = "DELETE FROM EntradaSaidaProdutos WHERE id=?";
+            String sql = "DELETE FROM Entrada_saida_produtos WHERE id=?";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setLong(1, id);
             stmt.execute();
@@ -92,7 +94,7 @@ public class EntradaSaidaProdutosDAO {
     }
 
     public List<EntradaSaidaProdutos> getMovimentacoes() {
-        String sql = "SELECT * FROM entrada_saida_produtos";
+        String sql = "SELECT * FROM Entrada_saida_produtos";
         try {
             PreparedStatement stmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
@@ -118,7 +120,7 @@ public class EntradaSaidaProdutosDAO {
     }
 
     public List<EntradaSaidaProdutos> getMovimentacoesMotivo(String motivo) {
-        String sql = "SELECT * FROM entrada_saida_produtos WHERE motivo LIKE ?";
+        String sql = "SELECT * FROM Entrada_saida_produtos WHERE motivo LIKE ?";
         try {
             PreparedStatement stmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             stmt.setString(1, "%" + motivo + "%");
