@@ -21,6 +21,7 @@ public class JFrameConsultaProduto extends javax.swing.JFrame {
     public JFrameConsultaProduto() {
         initComponents();
         preencheTabela();
+        setLocationRelativeTo(null);
     }
 
     /**

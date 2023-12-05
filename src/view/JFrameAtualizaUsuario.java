@@ -20,6 +20,7 @@ public class JFrameAtualizaUsuario extends javax.swing.JFrame {
     public JFrameAtualizaUsuario() {
         initComponents();
         usuarioDAO = new UsuarioDAO();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -43,7 +44,7 @@ public class JFrameAtualizaUsuario extends javax.swing.JFrame {
         txtEmail = new javax.swing.JTextField();
         btnExcluir = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("ID");
 
