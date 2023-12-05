@@ -18,7 +18,7 @@ public class ProdutoDAO {
     }
 
     public void inserir(Produto produto) {
-        String sql = "INSERT INTO produto (descricao, precoCusto, estoque, validade) VALUES (?, ?, ?, ?);";
+        String sql = "INSERT INTO produto (descricao, preco_de_custo, estoque, validade) VALUES (?, ?, ?, ?);";
 
         try {
             PreparedStatement stmt = this.conn.prepareStatement(sql);
@@ -45,7 +45,7 @@ public class ProdutoDAO {
             rs.first();
             produto.setId(id);
             produto.setDescricao(rs.getString("descricao"));
-            produto.setPrecoCusto(rs.getDouble("precoCusto"));
+            produto.setPrecoCusto(rs.getDouble("preco_de_custo"));
             produto.setEstoque(rs.getInt("estoque"));
             produto.setValidade(rs.getDate("validade"));
 
@@ -58,7 +58,7 @@ public class ProdutoDAO {
 
     public void editar(Produto produto) {
         try {
-            String sql = "UPDATE produto SET descricao=?, precoCusto=?, estoque=?, validade=? WHERE id=?";
+            String sql = "UPDATE produto SET descricao=?, preco_de_custo=?, estoque=?, validade=? WHERE id=?";
 
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, produto.getDescricao());
@@ -96,7 +96,7 @@ public class ProdutoDAO {
                 Produto produto = new Produto();
                 produto.setId(rs.getLong("id"));
                 produto.setDescricao(rs.getString("descricao"));
-                produto.setPrecoCusto(rs.getDouble("precoCusto"));
+                produto.setPrecoCusto(rs.getDouble("preco_de_custo"));
                 produto.setEstoque(rs.getInt("estoque"));
                 produto.setValidade(rs.getDate("validade"));
 
@@ -121,7 +121,7 @@ public class ProdutoDAO {
                 Produto produto = new Produto();
                 produto.setId(rs.getLong("id"));
                 produto.setDescricao(rs.getString("descricao"));
-                produto.setPrecoCusto(rs.getDouble("precoCusto"));
+                produto.setPrecoCusto(rs.getDouble("preco_de_custo"));
                 produto.setEstoque(rs.getInt("estoque"));
                 produto.setValidade(rs.getDate("validade"));
 
