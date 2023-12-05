@@ -9,21 +9,21 @@ email varchar(50),
 cargo varchar(30)
 );
 
-create table Produtos(
+create table Produto(
 id bigint auto_increment primary key,
 descricao varchar(30),
-precoDeCusto double,
+preco_de_custo double,
 estoque int,
-validade date
+validade varchar(30)
 );
 
-create table EntradaSaidaProdutos(
+create table Entrada_saida_produto(
 id bigint auto_increment primary key,
-idProduto bigint,
-idUsuario bigint,
+id_produto bigint,
+id_usuario bigint,
 motivo varchar(20),
 quantidade int,
-dataEhora datetime,
-foreign key (idProduto) references Produtos(id),
-foreign key (idUsuario) references Usuario(id)
+data_e_hora date,
+foreign key (id_produto) references Produto(id),
+foreign key (id_usuario) references Usuario(id)
 );
