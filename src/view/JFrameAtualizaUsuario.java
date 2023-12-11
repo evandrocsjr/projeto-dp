@@ -43,6 +43,7 @@ public class JFrameAtualizaUsuario extends javax.swing.JFrame {
         txtCargo = new javax.swing.JTextField();
         txtEmail = new javax.swing.JTextField();
         btnExcluir = new javax.swing.JButton();
+        btnConsultar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -94,6 +95,13 @@ public class JFrameAtualizaUsuario extends javax.swing.JFrame {
             }
         });
 
+        btnConsultar.setText("CONSULTAR");
+        btnConsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -107,6 +115,8 @@ public class JFrameAtualizaUsuario extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnExcluir)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnConsultar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnSalvar))
                     .addGroup(layout.createSequentialGroup()
@@ -154,7 +164,8 @@ public class JFrameAtualizaUsuario extends javax.swing.JFrame {
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvar)
-                    .addComponent(btnExcluir))
+                    .addComponent(btnExcluir)
+                    .addComponent(btnConsultar))
                 .addGap(17, 17, 17))
         );
 
@@ -178,85 +189,124 @@ public class JFrameAtualizaUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCargoActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-    String idOrNome = txtId.getText();
+       String idOrNome = txtId.getText();
 
-    if (idOrNome.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Por favor, insira um ID.");
-        return;
-    }    
+       if (idOrNome.isEmpty()) {
+           JOptionPane.showMessageDialog(this, "Por favor, insira um ID.");
+           return;
+       }    
 
-    try {
-        long id = Long.parseLong(idOrNome);
-        Usuario usuario = usuarioDAO.getUsuarioByIdOrNome(id, "");
+       try {
+           long id = Long.parseLong(idOrNome);
+           Usuario usuario = usuarioDAO.getUsuarioByIdOrNome(id, "");
 
-        if (usuario != null) {
-            String novoNome = txtNome.getText();
-            String novoEmail = txtEmail.getText();
-            String novoCargo = txtCargo.getText();
+           if (usuario != null) {
+               String novoNome = txtNome.getText();
+               String novoEmail = txtEmail.getText();
+               String novoCargo = txtCargo.getText();
 
-            usuario.setNome(novoNome);
-            usuario.setEmail(novoEmail);
-            usuario.setCargo(novoCargo);
-            usuarioDAO.editar(usuario);
+               if (novoNome.isEmpty() || novoEmail.isEmpty() || novoCargo.isEmpty()) {
+                   JOptionPane.showMessageDialog(this, "Preencha todos os campos antes de salvar.");
+                   return;
+               }
 
-            JOptionPane.showMessageDialog(this, "Usuário atualizado com sucesso!");
-        } else {
-            JOptionPane.showMessageDialog(this, "Usuário com o ID fornecido não encontrado.");
-        }
-    } catch (NumberFormatException ex) {
-        Usuario usuario = usuarioDAO.getUsuarioByIdOrNome(0, idOrNome);
+               usuario.setNome(novoNome);
+               usuario.setEmail(novoEmail);
+               usuario.setCargo(novoCargo);
+               usuarioDAO.editar(usuario);
 
-        if (usuario != null) {
-            String novoNome = txtNome.getText();
-            String novoEmail = txtEmail.getText();
-            String novoCargo = txtCargo.getText();
+               JOptionPane.showMessageDialog(this, "Usuário atualizado com sucesso!");
+           } else {
+               JOptionPane.showMessageDialog(this, "Usuário com o ID fornecido não encontrado.");
+           }
+       } catch (NumberFormatException ex) {
+           Usuario usuario = usuarioDAO.getUsuarioByIdOrNome(0, idOrNome);
 
-            usuario.setNome(novoNome);
-            usuario.setEmail(novoEmail);
-            usuario.setCargo(novoCargo);
-            usuarioDAO.editar(usuario);
+           if (usuario != null) {
+               String novoNome = txtNome.getText();
+               String novoEmail = txtEmail.getText();
+               String novoCargo = txtCargo.getText();
 
-            JOptionPane.showMessageDialog(this, "Usuário atualizado com sucesso!");
-        } else {
-            JOptionPane.showMessageDialog(this, "Usuário com o nome fornecido não encontrado.");
-        }
-    }
+               if (novoNome.isEmpty() || novoEmail.isEmpty() || novoCargo.isEmpty()) {
+                   JOptionPane.showMessageDialog(this, "Preencha todos os campos antes de salvar.");
+                   return;
+               }
+
+               usuario.setNome(novoNome);
+               usuario.setEmail(novoEmail);
+               usuario.setCargo(novoCargo);
+               usuarioDAO.editar(usuario);
+
+               JOptionPane.showMessageDialog(this, "Usuário atualizado com sucesso!");
+           } else {
+               JOptionPane.showMessageDialog(this, "Usuário com o nome fornecido não encontrado.");
+           }
+       }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-    String idTexto = txtId.getText();
-    String nome = txtNome.getText();
+        String idTexto = txtId.getText();
+        String nome = txtNome.getText();
 
-    if (idTexto.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Insira um ID válido para excluir o usuário.");
-        return;
-    }
-
-    try {
-        long id = Long.parseLong(idTexto);
-
-        UsuarioDAO usuarioDAO = new UsuarioDAO();
-
-        if (usuarioDAO.getUsuarioByIdOrNome(id, "") != null) {
-            usuarioDAO.excluir(id);
-
-            JOptionPane.showMessageDialog(this, "Usuário excluído com sucesso.");
-
-            limparCampos();
-        } else {
-            JOptionPane.showMessageDialog(this, "Usuário não encontrado.");
+        if (idTexto.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Insira um ID válido para excluir o usuário.");
+            return;
         }
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(this, "Insira um ID válido para excluir o usuário.");
-    }
-}
 
-private void limparCampos() {
-    txtId.setText("");
-    txtNome.setText("");
-    txtEmail.setText("");
-    txtCargo.setText("");
+        try {
+            long id = Long.parseLong(idTexto);
+
+            UsuarioDAO usuarioDAO = new UsuarioDAO();
+
+            if (usuarioDAO.getUsuarioByIdOrNome(id, "") != null) {
+                usuarioDAO.excluir(id);
+
+                JOptionPane.showMessageDialog(this, "Usuário excluído com sucesso.");
+
+                limparCampos();
+            } else {
+                JOptionPane.showMessageDialog(this, "Usuário não encontrado.");
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Insira um ID válido para excluir o usuário.");
+        }
+    }
+
+    private void limparCampos() {
+        txtId.setText("");
+        txtNome.setText("");
+        txtEmail.setText("");
+        txtCargo.setText("");
     }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
+        String idTexto = txtId.getText();
+
+        if (idTexto.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Insira um ID válido para consultar o usuário.");
+            return;
+        }
+
+        try {
+            long id = Long.parseLong(idTexto);
+
+            Usuario usuario = usuarioDAO.getUsuarioByIdOrNome(id, "");
+
+            if (usuario != null) {
+                txtNome.setText(usuario.getNome());
+                txtEmail.setText(usuario.getEmail());
+                txtCargo.setText(usuario.getCargo());
+
+                JOptionPane.showMessageDialog(this, "Usuário encontrado.");
+
+            } else {
+                JOptionPane.showMessageDialog(this, "Usuário não encontrado.");
+                limparCampos();
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Insira um ID válido para consultar o usuário.");
+        }
+    }//GEN-LAST:event_btnConsultarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -295,6 +345,7 @@ private void limparCampos() {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnConsultar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JLabel jLabel1;
