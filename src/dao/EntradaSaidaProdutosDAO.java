@@ -119,6 +119,7 @@ public class EntradaSaidaProdutosDAO {
         }
     }
 
+    
     public List<EntradaSaidaProdutos> getMovimentacoesMotivo(String motivo) {
         String sql = "SELECT * FROM Entrada_saida_produtos WHERE motivo LIKE ?";
         try {
@@ -140,7 +141,33 @@ public class EntradaSaidaProdutosDAO {
             }
             return listaMovimentacoes;
         } catch (SQLException ex) {
-            System.out.println("Erro ao consultar todas as movimentações: " + ex.getMessage());
+            System.out.println("Erro ao consultar todas as movimentações por motivo: " + ex.getMessage());
+            return null;
+        }
+    }
+    
+    public List<EntradaSaidaProdutos> getMovimentacoesNome(String nome) {
+        String sql = "SELECT * FROM Entrada_saida_produtos WHERE id_produto LIKE ?";
+        try {
+            PreparedStatement stmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            stmt.setString(1, "%" + nome + "%");
+            ResultSet rs = stmt.executeQuery();
+            List<EntradaSaidaProdutos> listaMovimentacoes = new ArrayList<>();
+
+            while (rs.next()) {
+                EntradaSaidaProdutos movimentacao = new EntradaSaidaProdutos();
+                movimentacao.setId(rs.getLong("id"));
+                movimentacao.setIdProduto(new ProdutoDAO().getProduto(rs.getLong("id_produto")));
+                movimentacao.setIdUsuario(new UsuarioDAO().getUsuario(rs.getLong("id_usuario")));
+                movimentacao.setMotivo(rs.getString("motivo"));
+                movimentacao.setQuantidade(rs.getInt("quantidade"));
+                movimentacao.setDataModificacao(rs.getDate("data_hora"));
+
+                listaMovimentacoes.add(movimentacao);
+            }
+            return listaMovimentacoes;
+        } catch (SQLException ex) {
+            System.out.println("Erro ao consultar todas as movimentações por nome: " + ex.getMessage());
             return null;
         }
     }
