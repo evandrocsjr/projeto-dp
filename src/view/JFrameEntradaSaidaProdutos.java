@@ -129,7 +129,7 @@ public class JFrameEntradaSaidaProdutos extends javax.swing.JFrame {
                             .addComponent(cmb_Produto, 0, 210, Short.MAX_VALUE)
                             .addComponent(cmb_Usuario, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(btnSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(181, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,7 +157,7 @@ public class JFrameEntradaSaidaProdutos extends javax.swing.JFrame {
                             .addComponent(jLabel6)
                             .addComponent(txtDataModificacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 166, Short.MAX_VALUE)
                 .addComponent(btnSalvar)
                 .addContainerGap())
         );
@@ -184,6 +184,11 @@ public class JFrameEntradaSaidaProdutos extends javax.swing.JFrame {
         EntradaSaidaProdutosDAO entradaSaidaProdutosDAO = new EntradaSaidaProdutosDAO();
         
         entradaSaidaProdutosDAO.inserir(entradaSaidaProdutos);
+        
+        produto.setEstoque(entradaSaidaProdutos.getQuantidade());
+        
+        ProdutoDAO pDAO = new ProdutoDAO();
+        pDAO.editar(produto);
         
         limparFormulario();
         
